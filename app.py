@@ -1,10 +1,10 @@
-from flask import Flask, request, send_file, jsonify
+from flask import Flask, request, send_file, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 import traceback
 from formatter import format_document
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app)
 
 UPLOAD_FOLDER = 'uploads'
@@ -16,15 +16,11 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 @app.route('/')
 def index():
-    return send_file('index.html')
+    return send_from_directory('.', 'index.html')
 
-@app.route('/style.css')
-def style():
-    return send_file('style.css')
-
-@app.route('/script.js')
-def script():
-    return send_file('script.js')
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory('.', path)
 
 @app.route('/format', methods=['POST'])
 def format_doc():
@@ -77,7 +73,5 @@ def format_doc():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    print("\n🚀 Starting KG College Document Formatter...")
-    print("📍 Server running at: http://localhost:5000")
-    print("="*50 + "\n")
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
