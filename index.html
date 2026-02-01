@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KG College Document Formatter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>KG College of Arts and Science</h1>
+            <h2>Document Formatter</h2>
+            <p>Automatically format your documents according to college guidelines</p>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-box" id="uploadBox">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <h3>Upload Your Document</h3>
+                <p>Drag & drop or click to select</p>
+                <p class="file-types">Supported: .docx files only</p>
+                <input type="file" id="fileInput" accept=".docx" style="display: none;">
+                <button class="btn-upload" onclick="document.getElementById('fileInput').click()">
+                    Choose File
+                </button>
+            </div>
+
+            <div id="fileInfo" class="file-info" style="display: none;">
+                <div class="file-details">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <div>
+                        <p class="file-name" id="fileName"></p>
+                        <p class="file-size" id="fileSize"></p>
+                    </div>
+                </div>
+                <button class="btn-process" id="processBtn" onclick="processDocument()">
+                    Format Document
+                </button>
+            </div>
+
+            <div id="processing" class="processing" style="display: none;">
+                <div class="spinner"></div>
+                <p>Processing your document...</p>
+                <p class="processing-note">Applying KG College formatting guidelines</p>
+            </div>
+
+            <div id="result" class="result" style="display: none;">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <h3>Document Formatted Successfully!</h3>
+                <button class="btn-download" id="downloadBtn">
+                    Download Formatted Document
+                </button>
+                <button class="btn-new" onclick="resetApp()">
+                    Format Another Document
+                </button>
+            </div>
+        </div>
+
+        <div class="guidelines">
+            <h3>Formatting Guidelines Applied:</h3>
+            <ul>
+                <li>Font: Times New Roman (12pt, 14pt, 16pt as per sections)</li>
+                <li>Line Spacing: Single and 1.5 as required</li>
+                <li>Alignment: Center, Justify as specified</li>
+                <li>Headers & Footers: 1cm spacing, 11pt font</li>
+                <li>Colors: Blue titles, Gray fills</li>
+                <li>Table formatting with center alignment</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
